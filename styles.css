@@ -1,0 +1,84 @@
+body {  
+    font-family: Arial, sans-serif;  
+}  
+  
+header {  
+    background-color: #fd0303;  
+    padding: 10px;  
+}  
+  
+nav ul {  
+    list-style-type: none;  
+    padding: 0;  
+}  
+
+
+  
+nav ul li {  
+    display: inline-block;  
+    margin-right: 10px;  
+}  
+  
+footer {  
+    bottom: 0;   
+    width: 100%;   
+    background-color: #333;  
+    color: #fff;   
+    text-align: center;  
+    padding: 10px;  
+  }
+  
+    #cartList {  
+        list-style-type: none;  
+        padding: 0;  
+    }  
+    #cartList li {  
+        margin-bottom: 10px;  
+    }  
+
+    .product-container {  
+        display: grid;  
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+        grid-gap: 10px;   
+    }  
+      
+  
+.article-image {  
+    width: 100%;  
+    max-width: 600px;  
+    height: auto;  
+    margin: 20px 0;  
+    display: block;  
+}  
+  
+  
+.parallel-content {  
+    display: flex;  
+    justify-content: space-between;   
+    align-items: flex-start;  
+}  
+  
+.course-content, .learning-goals {  
+    flex: 1;   
+    margin-right: 20px;   
+}  
+  
+.learning-goals {  
+    margin-right: 0;  
+}  
+  
+@media (max-width: 600px) {  
+    .parallel-content {  
+        flex-direction: column;  
+    }  
+  
+    .course-content, .learning-goals {  
+        margin-right: 0;  
+        margin-bottom: 20px;   
+    }  
+  
+    .learning-goals:last-child {  
+        margin-bottom: 0;   
+    }  
+}  
+  
