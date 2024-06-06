@@ -1,0 +1,101 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="stylesheet" href="styles.css">  
+    <title>Shopping - John Doe's Store</title>  
+</head>  
+<body>  
+    <header>  
+        <nav>  
+            <ul>  
+                <li><a href="index.html">Homepage</a></li>  
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="register.html">Register</a></li>  
+                <li><a href="login.html">Login</a></li>  
+                <li><a href="shopping.html">Shopping</a></li>
+            </ul>  
+        </nav>  
+    </header>
+    <script>
+        function checkLoginCookie() {  
+    // 获取cookie字符串，通常cookie之间是以';'分隔的，而不是','  
+    var cookies = document.cookie.split(";");  
+    for (var i = 0; i < cookies.length; i++) { // 'ver' 应为 'var'，且循环条件中的 '·1+4' 是错误的  
+        var cookie = cookies[i].trim(); // 移除每个cookie字符串前后的空格  
+        // 如果cookie以"login="开头  
+        if (cookie.substring(0, 6) === "login=") { // 'e' 应为 '0'，且 "login…" 应该是 "login="  
+            var cookieValue = cookie.substring(6); // 获取"login="后面的值  
+            alert("Cookie login is set to: " + cookieValue); // 字符串拼接应该使用 '+' 而不是 '.'  
+            return true; // 找到cookie并验证了值  
+        }  
+    }  
+    // 如果没有找到以"login="开头的cookie  
+    return false; // Cookie未找到  
+}  
+  
+// 使用示例  
+if (checkLoginCookie()) {  
+    alert('用户已登录');  
+} else {  
+    alert('请先登录');  
+    window.location.href = 'login.html';  
+}
+    </script>  
+    <section id="shopping-section">  
+        <h2>Shopping</h2>  
+        <div class="product-container">    
+            <div class="product">    
+                <h3>Course 1</h3>    
+                <p>Price: $30.00</p>    
+                <input type="number" min="1" value="1" id="quantity1">    
+                <button onclick="addToCart(30.00, 'Course 1', 'quantity1')">Add to shopping cart</button>    
+            </div>    
+            <div class="product">    
+                <h3>Course 2</h3>    
+                <p>Price: $50.00</p>    
+                <input type="number" min="1" value="1" id="quantity2">    
+                <button onclick="addToCart(50.00, 'Course 2', 'quantity2')">Add to shopping cart</button>    
+            </div>    
+            <div class="product">    
+                <h3>Course 3</h3>    
+                <p>Price: $80.00</p>    
+                <input type="number" min="1" value="1" id="quantity3">    
+                <button onclick="addToCart(80.00, 'Course 3', 'quantity3')">Add to shopping cart</button>    
+            </div>  
+            <div class="product">    
+                <h3>Course 4</h3>    
+                <p>Price: $100.00</p>    
+                <input type="number" min="1" value="1" id="quantity4">    
+                <button onclick="addToCart(100.00, 'Course 4', 'quantity4')">Add to shopping cart</button>    
+            </div>  
+            <div class="product">    
+                <h3>Course 5</h3>    
+                <p>Price: $150.00</p>    
+                <input type="number" min="1" value="1" id="quantity5">    
+                <button onclick="addToCart(150.00, 'Course 5', 'quantity5')">Add to shopping cart</button>    
+            </div>    
+        </div>
+    </section>  
+        <div class="cart-display">  
+            <h3>Cart</h3>  
+            <ul id="cart-items"></ul>  
+            <p>Total: $<span id="cart-total">0.00</span></p>  
+        </div>  
+        <div>  
+            <button onclick="checkoutCart()">Checkout</button> 
+            <button onclick="clearCart()">empty cart</button>
+        </div>  
+    </section>
+    <footer>  
+        <p>© 2023 Leyun International Shopping Platform. All rights reserved.</p>   
+            <p>   Contact Information:  
+                <p> For any inquiries, please contact us at:  
+                    <p>   Email: 2813075984@qq.com
+                        <p>   Phone: 1 234 567 890  
+                            <p>  Address: 123 Main Street, Ningbo, China   
+    </footer>   
+    <script src="script.js"></script>  
+</body>  
+</html>
