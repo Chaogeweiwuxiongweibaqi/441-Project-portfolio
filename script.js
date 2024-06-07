@@ -1,30 +1,57 @@
 // Tony - JavaScript Developer  
 
-//Comment 1: Declare some simulated user data 
-let users = [];   
+function checkLoginStatus() {
+    return localStorage.getItem('isLoggedIn') === 'true';
+}
 
+document.getElementById('shopping-link').addEventListener('click', function(event) {
+    if (!checkLoginStatus()) {
+        event.preventDefault(); 
+        alert('Please log in first.');
+        window.location.href = 'login.html'; 
+    }
+});
+function logoutUser() {
+    localStorage.removeItem('isLoggedIn'); 
+    localStorage.removeItem('username');
+    localStorage.removeItem('password');
+    alert('You have been logged out.');
+    window.location.href = 'index.html';
+}
+//Logout button
+document.getElementById('logout-button').addEventListener('click', logoutUser);
 
-//Note 2: Simulate checkout function (only displaying a warning here)
+window.onload = function() {
+//Check if the referrer is empty or does not contain the current site URL
+    if (!document.referrer || !document.referrer.includes(window.location.hostname)) {
+        localStorage.setItem('isLoggedIn', 'false');
+    }
+};
+
+//Simulate user data
+let users = [];
+
+//Simulated checkout function
 function checkout() {  
-    alert('You have successfully checkout!');  
-}  
+    alert('You have successfully checked out!');  
+}
 
-//Note 3: Notify quantity
-let cart = [];  
-  
+//Shopping cart function
+let cart = [];
+
 function CartItem(productName, price, quantity) {  
     this.productName = productName;  
     this.price = price;  
     this.quantity = quantity;  
-}  
-  
+}
+
 function addToCart(price, productName, quantityId) {    
     let quantity = parseInt(document.getElementById(quantityId).value, 10);  
     if (isNaN(quantity) || quantity <= 0) {  
         alert('Please enter a valid quantity.');  
         return;  
     }  
-  
+
     let existingItem = cart.find(item => item.productName === productName);  
     if (existingItem) {  
         existingItem.quantity += quantity;  
@@ -32,33 +59,29 @@ function addToCart(price, productName, quantityId) {
         let item = new CartItem(productName, price, quantity);  
         cart.push(item);  
     }  
-  
+
     displayCart();  
     updateCartTotal();  
-}  
-  
+}
+
 function displayCart() {  
     let cartItemsList = document.getElementById('cart-items');  
     cartItemsList.innerHTML = ''; 
-  
+
     cart.forEach(item => {  
         let listItem = document.createElement('div');  
-        listItem.textContent = `${item.quantity} x ${item.productName} - 
-${item.price * item.quantity}`;  
+        listItem.textContent = `${item.quantity} x ${item.productName} - ${item.price * item.quantity}`;  
         cartItemsList.appendChild(listItem);  
     });  
-}  
-  
+}
+
 function updateCartTotal() {  
     let total = 0;  
     cart.forEach(item => {  
         total += item.price * item.quantity;  
     });  
     document.getElementById('cart-total').textContent = total.toFixed(2);  
-}  
-  
-displayCart();  
-updateCartTotal();  
+}
 
 function clearCart() {  
     document.getElementById("quantity1").value = 0;
@@ -66,62 +89,70 @@ function clearCart() {
     document.getElementById("quantity3").value = 0;
     document.getElementById("quantity4").value = 0;
     document.getElementById("quantity5").value = 0;
-  cart = [];  
-  alert('The shopping cart has been cleared!');  
-  displayCart(); 
-  updateCartTotal(); 
-}  
+    cart = [];  
+    alert('The shopping cart has been cleared!');  
+    displayCart();  
+    updateCartTotal();  
+}
 
 function checkoutCart() {  
     cart = [];  
     alert('Settled, please make payment');  
-    displayCart(); 
-  updateCartTotal(); 
+    displayCart();  
+    updateCartTotal();  
 }
 
-//Comment 4: Simulate registering user function
+//Simulated registration function
 function registerUser() {  
-    // Get input values  
     var username = document.getElementById('register-username').value;  
     var password = document.getElementById('register-password').value;  
-  
-    // Simple validation  
+
     if (!username || !password) {  
         alert('Please fill in both username and password.');  
         return;  
     }  
-  
-    // Store user data in localStorage (not secure!)  
+
     localStorage.setItem('username', username);  
-    // Note: Storing passwords in localStorage is not secure. Use hashed passwords in a real-world scenario.  
     localStorage.setItem('password', password);  
-  
+
     alert('Registration successful!');  
     window.location.href = 'login.html';
-}  
-  
-// Call the function when the register button is clicked  
+}
+
 document.getElementById('register-button').addEventListener('click', registerUser);
-  
-//Comment 5: Simulate login user function
+
+//Simulated login function
 function loginUser() {  
-    // Get input values  
     var inputUsername = document.getElementById('login-username').value;  
     var inputPassword = document.getElementById('login-password').value;  
-  
-    // Get stored user data from localStorage  
+
     var storedUsername = localStorage.getItem('username');  
     var storedPassword = localStorage.getItem('password');  
-  
-    // Compare input values with stored values  
+
     if (inputUsername === storedUsername && inputPassword === storedPassword) {  
         alert('Login successful!');  
+        localStorage.setItem('isLoggedIn', 'true'); //Set login status
         window.location.href = 'shopping.html';
     } else {  
         alert('Invalid username or password.'); 
         window.location.href = 'register.html';
     }  
-}  
-  
-// Call the function when the login button is clicked  
+}
+
 document.getElementById('login-button').addEventListener('click', loginUser);
+
+//Simulate login function
+function logoutUser() {
+    localStorage.removeItem('isLoggedIn'); //Remove login status
+    alert('You have been logged out.');
+    window.location.href = 'login.html';
+}
+
+//Add click event listeners to the "Shopping" link
+document.getElementById('shopping-link').addEventListener('click', function(event) {
+    if (!checkLoginStatus()) {
+        event.preventDefault(); //Block default behavior
+        alert('Please login first.');
+        window.location.href = 'login.html';
+    }
+});
