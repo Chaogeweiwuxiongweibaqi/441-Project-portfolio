@@ -5,29 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <link rel="stylesheet" href="styles.css">  
     <title>Shopping - John Doe's Store</title>
-    <script>  
-        // 检查localStorage中的标记，看页面是否已在当前浏览器中打开  
-        function checkIfPageIsOpen() {  
-            const isPageOpen = localStorage.getItem('pageIsOpen');  
-            if (isPageOpen && isPageOpen === 'true') {  
-                alert('您已经在一个标签页中打开了此页面。');  
-                // 在这里你可以决定是否要重定向到其他页面或者只是显示警告  
-                // window.location.href = 'other_page.html'; // 如果需要重定向  
-            } else {  
-                // 如果没有在其他标签页中打开，设置localStorage标记  
-                localStorage.setItem('pageIsOpen', 'true');  
-                // 在这里你可以继续页面加载或执行其他操作  
-            }  
-        }  
-          
-        // 在页面加载时调用函数  
-        window.onload = checkIfPageIsOpen;  
-          
-        // 如果你还希望用户在关闭标签页时清除localStorage中的标记  
-        window.onbeforeunload = function() {  
-            localStorage.removeItem('pageIsOpen');  
-        };  
-        </script> 
 </head>  
 <body>  
     <header>  
