@@ -1,5 +1,3 @@
-// Tony - JavaScript Developer  
-
 function checkLoginStatus() {
     return localStorage.getItem('isLoggedIn') === 'true';
 }
@@ -18,25 +16,25 @@ function logoutUser() {
     alert('You have been logged out.');
     window.location.href = 'index.html';
 }
-//Logout button
+// 登出按钮
 document.getElementById('logout-button').addEventListener('click', logoutUser);
 
 window.onload = function() {
-//Check if the referrer is empty or does not contain the current site URL
     if (!document.referrer || !document.referrer.includes(window.location.hostname)) {
-        localStorage.setItem('isLoggedIn', 'false');
+        logoutUser();  // 直接调用登出函数
     }
 };
 
-//Simulate user data
+
+// 模拟用户数据
 let users = [];
 
-//Simulated checkout function
+// 模拟结账功能
 function checkout() {  
     alert('You have successfully checked out!');  
 }
 
-//Shopping cart function
+// 购物车功能
 let cart = [];
 
 function CartItem(productName, price, quantity) {  
@@ -102,7 +100,7 @@ function checkoutCart() {
     updateCartTotal();  
 }
 
-//Simulated registration function
+// 模拟注册功能
 function registerUser() {  
     var username = document.getElementById('register-username').value;  
     var password = document.getElementById('register-password').value;  
@@ -121,7 +119,7 @@ function registerUser() {
 
 document.getElementById('register-button').addEventListener('click', registerUser);
 
-//Simulated login function
+// 模拟登录功能
 function loginUser() {  
     var inputUsername = document.getElementById('login-username').value;  
     var inputPassword = document.getElementById('login-password').value;  
@@ -131,7 +129,7 @@ function loginUser() {
 
     if (inputUsername === storedUsername && inputPassword === storedPassword) {  
         alert('Login successful!');  
-        localStorage.setItem('isLoggedIn', 'true'); //Set login status
+        localStorage.setItem('isLoggedIn', 'true'); // 设置登录状态
         window.location.href = 'shopping.html';
     } else {  
         alert('Invalid username or password.'); 
@@ -141,22 +139,21 @@ function loginUser() {
 
 document.getElementById('login-button').addEventListener('click', loginUser);
 
-//Simulate login function
+// 模拟登出功能
 function logoutUser() {
-    localStorage.removeItem('isLoggedIn'); //Remove login status
-    alert('You have been logged out.');
-    window.location.href = 'login.html';
+    localStorage.removeItem('isLoggedIn'); // 移除登录状态
+    localStorage.removeItem('username');   // 可选：清除其他用户信息
+    localStorage.removeItem('password');
+    window.location.href = 'login.html';  // 直接重定向到登录页面
 }
 
+
+
+// 添加点击事件监听器到“Shopping”链接
 document.getElementById('shopping-link').addEventListener('click', function(event) {
     if (!checkLoginStatus()) {
-        event.preventDefault(); //Block default behavior
-        alert('Please login first.');
+        event.preventDefault(); // 阻止默认行为（导航）
+        alert('Please log in first.');
         window.location.href = 'login.html';
     }
-    if (!localStorage.getItem('visitedBefore')) {  
-        localStorage.setItem('visitedBefore', 'true');  
-        alert('您似乎在一个新的浏览器或会话中打开了页面。');  
-    }
 });
-
