@@ -148,11 +148,15 @@ function logoutUser() {
     window.location.href = 'login.html';
 }
 
-//Add click event listeners to the "Shopping" link
 document.getElementById('shopping-link').addEventListener('click', function(event) {
     if (!checkLoginStatus()) {
         event.preventDefault(); //Block default behavior
         alert('Please login first.');
         window.location.href = 'login.html';
     }
+    if (!localStorage.getItem('visitedBefore')) {  
+        localStorage.setItem('visitedBefore', 'true');  
+        alert('您似乎在一个新的浏览器或会话中打开了页面。');  
+    }
 });
+
